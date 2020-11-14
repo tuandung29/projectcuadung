@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\product;
+use App\ProductType;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -25,7 +26,8 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('page.AddPro');
+        $type = ProductType::all();
+        return view('page.AddPro',compact('type'));
     }
 
     /**
@@ -36,8 +38,8 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        //dd($request);
+        dd($request->all());
+
         $request->validate([
             'prod_id' => 'required|integer',
             'prod_name' => 'required',

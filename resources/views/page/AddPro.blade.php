@@ -1,7 +1,7 @@
 @extends('Admin')
 @section('content')
     <form action="{{route('admin.store')}}" method="post" enctype="multipart/form-data">
-{{--        <input type="hidden" name="_token" value="{{csrf_token()}}">--}}
+        {{--        <input type="hidden" name="_token" value="{{csrf_token()}}">--}}
         @csrf
         <div class="container " style="width: 50rem;">
 
@@ -12,8 +12,24 @@
                     @endforeach
                 </div>
             @endif
-
             <div class="form-group">
+                <label for="name">Tên khách hàng:</label>
+                <input type="text" class="form-control" name="name"/>
+            </div>
+            <div class="form-group">
+                <label for="phone">Số điện thoại:</label>
+                <input type="text" class="form-control" name="phone"/>
+            </div>
+            @foreach($type as $key => $value)
+                <div class="form-group">
+                    <input type="hidden" value="{{$value->id}}" name="product[{{$key}}][id_type]">
+                    <label for="prod_name">Loại {{$value->name}}:</label>
+                    <input type="number" placeholder="Nhập số lượng" class="form-control" name="product[{{$key}}][unit]"/>
+                    <textarea class="form-control" placeholder="Thêm ghi chú" rows="3" name="product[{{$key}}][decripsion]"></textarea>
+                </div>
+            @endforeach
+
+            {{--<div class="form-group">
                 <label for="prod_name">Product id:</label>
                 <input type="text" class="form-control" name="prod_id"/>
             </div>
@@ -48,7 +64,7 @@
             <div class="form-group">
                 <label for="prod_name">Product img:</label>
                 <input type="file" class="form-control" name="prod_img"/>
-            </div>
+            </div>--}}
             <button type="submit" class="btn btn-danger">Add</button>
             <a href="{{route('admin.index')}}" class="btn btn-warning">Back</a>
 
