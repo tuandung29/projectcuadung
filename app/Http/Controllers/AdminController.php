@@ -27,7 +27,7 @@ class AdminController extends Controller
     public function create()
     {
         $type = ProductType::all();
-        return view('page.AddPro',compact('type'));
+        return view('page.AddPro', compact('type'));
     }
 
     /**
@@ -138,7 +138,7 @@ class AdminController extends Controller
             $edit_pro->image = $fileName;
         }
         $edit_pro->save();
-
+//dd('cc');
         return redirect('/admin')->with('success', 'update thành công');
 
 
